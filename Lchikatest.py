@@ -1,7 +1,7 @@
 import gpiod
 
 # GPIO コントローラーチップ 0 を取得
-chip = gpiod.Chip(0)
+chip = gpiod.Chip("0")
 
 # GPIO ライン 26 を取得
 line = chip.get_line(26)
