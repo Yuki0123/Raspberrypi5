@@ -8,7 +8,7 @@ line = chip.get_line(26)
 
 # GPIO ライン 25 を出力として設定
 #line.request(gpiod.LINE_REQUEST_DIRECTION_OUT)
-line.request(chip.DIRECTION_OUT)
+line.request(chip.LINE_REQUEST_DIRECTION_OUT)
 
 # 無限ループで点滅
 while True:
