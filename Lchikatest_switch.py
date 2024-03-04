@@ -1,6 +1,6 @@
 import gpiod
 LED_PIN = 17
-BUTTON_PIN = 27
+BUTTON_PIN = 21
 chip = gpiod.Chip('gpiochip4')
 led_line = chip.get_line(LED_PIN)
 button_line = chip.get_line(BUTTON_PIN)
