@@ -1,16 +1,17 @@
 import gpiod
+import time
 
-# GPIO コントローラーチップ 0 を取得
-chip = gpiod.Chip("0")
 
-# GPIO ライン 26 を取得
-line = chip.get_line(26)
+PIN_NO = 17
+chip = gpiod.Chip('gpiochip4', gpiod.Chip.OPEN_BY_NAME)
+line = chip.get_line(PIN_NO)
+line.request(consumer="LED", type=gpiod.LINE_REQ_DIR_OUT)
 
-# GPIO ライン 26 を出力として設定
-line.request(gpiod.Chip.DIRECTION_OUT)
-
-# GPIO ライン 26 を HIGH に設定
+# GPIOライン25をHIGHに設定
 line.set_value(1)
 
-# GPIO ライン 26 を LOW に設定
+# 1秒待機
+time.sleep(1)
+
+# GPIOライン25をLOWに設定
 line.set_value(0)
