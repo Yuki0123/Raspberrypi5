@@ -1,10 +1,10 @@
 import gpiod
 
 # GPIO コントローラーチップ 0 を取得
-chip = gpiod.Chip(0)
+chip = gpiod.Chip('0')
 
 # GPIO ライン 25 を取得
-line = chip.get_line(25)
+line = chip.get_line(26)
 
 # GPIO ライン 25 を出力として設定
 line.request(gpiod.LINE_REQUEST_DIRECTION_OUT)
