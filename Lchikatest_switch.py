@@ -11,10 +11,8 @@ try:
        button_state = button_line.get_value()
        if button_state == 1:
            led_line.set_value(1)
-           print("a")
        else:
            led_line.set_value(0)
-           print("b")
 finally:
    led_line.release()
-button_line.release()
+   button_line.release()
