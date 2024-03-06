@@ -21,7 +21,7 @@ led_line_blue.request(consumer="LED_BLUE", type=gpiod.LINE_REQ_DIR_OUT)
 try:
     while True:
         led_line_red.set_value(1)  # 赤LEDを点灯
-        led_line_green.set_value(0)  # 緑LEDを消灯
+        led_line_green.set_value(1)  # 緑LEDを消灯
         led_line_blue.set_value(1)  # 青LEDを点灯
 
         time.sleep(1)  # 遅延を入れてボタン状態の変化に適応
