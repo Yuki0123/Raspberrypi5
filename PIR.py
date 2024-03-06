@@ -45,6 +45,7 @@ def loop():
 
        if pir_state == 1:
            setcolor([r,g,b])
+           time.sleep(0.1)
        else:
            setcolor([0,0,0])
            
