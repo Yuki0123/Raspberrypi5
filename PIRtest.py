@@ -27,7 +27,7 @@ def setup():
 
 
 def setcolor(color):
-        print(color)
+        #print(color)
         led_red_pwm.value = color[0]  # 赤LEDを点灯
         led_green_pwm.value=color[1]  # 緑LEDを消灯
         led_blue_pwm.value=color[2]   # 青LEDを点灯
@@ -39,7 +39,7 @@ def loop():
        if pir_state == 1:
            setcolor([1,0,0])
        else:
-           setcolor([0,0,1])
+           setcolor([1,1,1])
 
 def destroy():
     led_red_pwm.close()
