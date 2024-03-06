@@ -11,7 +11,7 @@ LED_PIN_BLUE = 27
 chip = gpiod.Chip('gpiochip4')  # 使用するgpiochipが異なる場合は変更
 
 # 赤色LED用PWMデバイスの生成
-led_red_pwm = PWMOutputDevice(line=LED_PIN_RED, frequency=2000)
+led_red_pwm = PWMOutputDevice(LED_PIN_RED, frequency=2000)
 
 # GPIOラインのリクエスト (出力モードで)
 #led_line_red = chip.get_line(LED_PIN_RED)
