@@ -39,7 +39,7 @@ def loop():
        if pir_state == 1:
            setcolor([1,0,0])
        else:
-           setcolor([1,1,1])
+           setcolor([0,0,1])
 
 def destroy():
     led_red_pwm.close()
