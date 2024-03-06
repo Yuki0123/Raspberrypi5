@@ -2,8 +2,8 @@ import gpiod
 import time
 
 # GPIOピンの定義
-LED_PIN_RED = 17
-LED_PIN_GREEN = 22
+LED_PIN_RED = 22
+LED_PIN_GREEN = 18
 LED_PIN_BLUE = 27
 
 # GPIOチップの初期化
@@ -24,7 +24,7 @@ try:
         led_line_green.set_value(0)  # 緑LEDを消灯
         led_line_blue.set_value(1)  # 青LEDを点灯
 
-        time.sleep(0.1)  # 遅延を入れてボタン状態の変化に適応
+        time.sleep(1)  # 遅延を入れてボタン状態の変化に適応
 
 finally:
     # GPIOラインの解放
