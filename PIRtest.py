@@ -32,13 +32,14 @@ def setcolor(color):
         led_green_pwm.value=color[1]  # 緑LEDを消灯
         led_blue_pwm.value=color[2]   # 青LEDを点灯
         print(color[2])
+
 def loop():
     while True:
        pir_state = pir_line.get_value()
        if pir_state == 1:
-           setcolor([1,0,0])
+           setcolor([0,1,0])
        else:
-           setcolor([0,0,1])
+           setcolor([1,0,0])
            
 
 def destroy():
