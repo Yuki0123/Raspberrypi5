@@ -1,0 +1,34 @@
+import gpiod
+import time
+
+# GPIOピンの定義
+LED_PIN_RED = 17
+LED_PIN_GREEN = 22
+LED_PIN_BLUE = 27
+
+# GPIOチップの初期化
+chip = gpiod.Chip('gpiochip4')  # 使用するgpiochipが異なる場合は変更
+
+# GPIOラインのリクエスト (出力モードで)
+led_line_red = chip.get_line(LED_PIN_RED)
+led_line_green = chip.get_line(LED_PIN_GREEN)
+led_line_blue = chip.get_line(LED_PIN_BLUE)
+
+led_line_red.request(consumer="LED_RED", type=gpiod.LINE_REQ_DIR_OUT)
+led_line_green.request(consumer="LED_GREEN", type=gpiod.LINE_REQ_DIR_OUT)
+led_line_blue.request(consumer="LED_BLUE", type=gpiod.LINE_REQ_DIR_OUT)
+
+try:
+    while True:
+        led_line_red.set_value(1)  # 赤LEDを点灯
+        led_line_green.set_value(0)  # 緑LEDを消灯
+        led_line_blue.set_value(1)  # 青LEDを点灯
+
+        time.sleep(0.1)  # 遅延を入れてボタン状態の変化に適応
+
+finally:
+    # GPIOラインの解放
+    led_line_red.release()
+    led_line_green.release()
+    led_line_blue.release()
+ 
