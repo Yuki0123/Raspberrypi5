@@ -32,9 +32,9 @@ def setup():
 
 def setcolor(brightness):
         #print(color)
-        led_red_pwm.value=brightness(0) # 赤LEDを点灯
-        led_green_pwm.value=brightness(1)   # 緑LEDを消灯
-        led_blue_pwm.value=brightness(2)   # 青LEDを点灯
+        led_red_pwm.value=brightness[0] # 赤LEDを点灯
+        led_green_pwm.value=brightness[1]   # 緑LEDを消灯
+        led_blue_pwm.value=brightness[2]   # 青LEDを点灯
 
 def loop():
     while True:
