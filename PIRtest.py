@@ -25,24 +25,24 @@ def setup():
     led_green_pwm = PWMOutputDevice(LED_PIN_GREEN, frequency=2000)
     led_blue_pwm = PWMOutputDevice(LED_PIN_BLUE, frequency=2000)
 
-    led_red_pwm.set_dutycycle(0)
-    led_green_pwm.set_dutycycle(0)
-    led_blue_pwm.set_dutycycle(0)
+    led_red_pwm.value=0
+    led_green_pwm.value=0
+    led_blue_pwm.value=0
     
 
 def setcolor(brightness):
         #print(color)
-        led_red_pwm.ChangeDutyCycle(brightness[0])  # 赤LEDを点灯
-        led_green_pwm.ChangeDutyCycle(brightness[1])   # 緑LEDを消灯
-        led_blue_pwm.ChangeDutyCycle(brightness[2])   # 青LEDを点灯
+        led_red_pwm.value=brightness(0) # 赤LEDを点灯
+        led_green_pwm.value=brightness(1)   # 緑LEDを消灯
+        led_blue_pwm.value=brightness(2)   # 青LEDを点灯
 
 def loop():
     while True:
        pir_state = pir_line.get_value()
        if pir_state == 1:
-           setcolor([0,100,0])
+           setcolor([0,1,0])
        else:
-           setcolor([100,0,0])
+           setcolor([1,0,0])
            
 
 def destroy():
