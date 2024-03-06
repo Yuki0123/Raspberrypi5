@@ -32,9 +32,9 @@ def setup():
 
 def setcolor(brightness):
         #print(color)
-        led_red_pwm.set_dutycycle(brightness[0])  # 赤LEDを点灯
-        led_green_pwm.set_dutycycle(brightness[1])   # 緑LEDを消灯
-        led_blue_pwm.set_dutycycle(brightness[2])   # 青LEDを点灯
+        led_red_pwm.ChangeDutyCycle(brightness[0])  # 赤LEDを点灯
+        led_green_pwm.ChangeDutyCycle(brightness[1])   # 緑LEDを消灯
+        led_blue_pwm.ChangeDutyCycle(brightness[2])   # 青LEDを点灯
 
 def loop():
     while True:
