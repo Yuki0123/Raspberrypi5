@@ -1,47 +1,66 @@
-import gpiod
+import RPi.GPIO as GPIO
 import time
-from gpiozero import PWMOutputDevice
-import random
 
-# GPIOピンの定義
-LED_PIN_RED = 22
-LED_PIN_GREEN = 18
-LED_PIN_BLUE = 27
+rgbPins = {'Red':18, 'Green':27, 'Blue':22}
+pirPin = 17    # the pir connect to pin17
 
-# GPIOチップの初期化
-chip = gpiod.Chip('gpiochip4')  # 使用するgpiochipが異なる場合は変更
+def setup():
+    global p_R, p_G, p_B
+    GPIO.setmode(GPIO.BCM)          # Set the GPIO modes to BCM Numbering
+    GPIO.setup(pirPin, GPIO.IN)    # Set pirPin to input
+    # Set all LedPin's mode to output and initial level to High(3.3v)
+    for i in rgbPins:
+        GPIO.setup(rgbPins[i], GPIO.OUT, initial=GPIO.HIGH)
 
-# 赤色LED用PWMデバイスの生成
-led_red_pwm = PWMOutputDevice(LED_PIN_RED, frequency=2000)
-led_green_pwm = PWMOutputDevice(LED_PIN_GREEN, frequency=2000)
-led_blue_pwm = PWMOutputDevice(LED_PIN_BLUE, frequency=2000)
+    # Set all led as pwm channel and frequece to 2KHz
+    p_R = GPIO.PWM(rgbPins['Red'], 2000)
+    p_G = GPIO.PWM(rgbPins['Green'], 2000)
+    p_B = GPIO.PWM(rgbPins['Blue'], 2000)
 
-# GPIOラインのリクエスト (出力モードで)
-#led_line_red = chip.get_line(LED_PIN_RED)
-#led_line_green = chip.get_line(LED_PIN_GREEN)
-#led_line_blue = chip.get_line(LED_PIN_BLUE)
+    # Set all begin with value 0
+    p_R.start(0)
+    p_G.start(0)
+    p_B.start(0)
 
-#led_line_red.request(consumer="LED_RED", type=gpiod.LINE_REQ_DIR_OUT)
-#led_line_green.request(consumer="LED_GREEN", type=gpiod.LINE_REQ_DIR_OUT)
-#led_line_blue.request(consumer="LED_BLUE", type=gpiod.LINE_REQ_DIR_OUT)
+# Define a MAP function for mapping values.  Like from 0~255 to 0~100
+def MAP(x, in_min, in_max, out_min, out_max):
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
-try:
+# Define a function to set up colors
+def setColor(color):
+# configures the three LEDs' luminance with the inputted color value .
+    # Devide colors from 'color' veriable
+    R_val = (color & 0xFF0000) >> 16
+    G_val = (color & 0x00FF00) >> 8
+    B_val = (color & 0x0000FF) >> 0
+    # Map color value from 0~255 to 0~100
+    R_val = MAP(R_val, 0, 255, 0, 100)
+    G_val = MAP(G_val, 0, 255, 0, 100)
+    B_val = MAP(B_val, 0, 255, 0, 100)
+
+    #Assign the mapped duty cycle value to the corresponding PWM channel to change the luminance.
+    p_R.ChangeDutyCycle(R_val)
+    p_G.ChangeDutyCycle(G_val)
+    p_B.ChangeDutyCycle(B_val)
+    #print ("color_msg: R_val = %s, G_val = %s,     B_val = %s"%(R_val, G_val, B_val))
+
+def loop():
     while True:
-        
-        r=random.random()
-        g=random.random()
-        b=random.random()
+        pir_val = GPIO.input(pirPin)
+        if pir_val==GPIO.HIGH:
+            setColor(0xFFFF00)
+        else :
+            setColor(0x0000FF)
 
-        led_red_pwm.value = r  # 赤LEDを点灯
-        led_green_pwm.value=g  # 緑LEDを消灯
-        led_blue_pwm.value=b   # 青LEDを点灯
-        
-        print([r,g,b])
+def destroy():
+    p_R.stop()
+    p_G.stop()
+    p_B.stop()
+    GPIO.cleanup()                     # Release resource
 
-        time.sleep(0.1)  # 遅延を入れてボタン状態の変化に適応
-
-except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
-
-    led_red_pwm.close()
-    led_green_pwm.close()
-    led_blue_pwm.close()
+if __name__ == '__main__':     # Program start from here
+    setup()
+    try:
+        loop()
+    except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
+        destroy()
