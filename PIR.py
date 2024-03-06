@@ -28,10 +28,16 @@ led_blue_pwm = PWMOutputDevice(LED_PIN_BLUE, frequency=2000)
 try:
     while True:
         
-        led_red_pwm.value = random.random()  # 赤LEDを点灯
-        led_green_pwm.value=random.random()   # 緑LEDを消灯
-        led_blue_pwm.value=random.random()   # 青LEDを点灯
+        r=random.random()
+        g=random.random()
+        b=random.random()
 
+        led_red_pwm.value = r  # 赤LEDを点灯
+        led_green_pwm.value=g  # 緑LEDを消灯
+        led_blue_pwm.value=b   # 青LEDを点灯
+        
+        print([r,g,b])
+        
         time.sleep(1)  # 遅延を入れてボタン状態の変化に適応
 
 except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
