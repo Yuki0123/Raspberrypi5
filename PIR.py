@@ -42,7 +42,6 @@ def loop():
        r=random.random()
        g=random.random()
        b=random.random()
-       print(pir_state)
 
        if pir_state == 1:
            setcolor([r,g,b])
