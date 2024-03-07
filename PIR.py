@@ -42,14 +42,14 @@ def loop():
        r=random.random()
        g=random.random()
        b=random.random()
+       print(pir_state)
 
        if pir_state == 1:
            setcolor([r,g,b])
            time.sleep(0.1)
        else:
            setcolor([0,0,0])
-           
-
+    
 def destroy():
     led_red_pwm.close()
     led_green_pwm.close()
