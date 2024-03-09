@@ -16,12 +16,12 @@ a1_line.request(consumer="A1", type=gpiod.LINE_REQ_DIR_OUT)
 a2_line.request(consumer="A2", type=gpiod.LINE_REQ_DIR_OUT)
 
 try:
-    en_line.setvalue(gpiod.LINE_VALUE_HIGH)
+    en_line.set_value(gpiod.LINE_VALUE_HIGH)
 
     while True:
-        a1_line.setvalue(gpiod.LINE_VALUE_HIGH)
+        a1_line.set_value(gpiod.LINE_VALUE_HIGH)
         time.sleep(5)
-        a1_line.setvalue(gpiod.LINE_VALUE_LOW)
+        a1_line.set_value(gpiod.LINE_VALUE_LOW)
         time.sleep(5)
 
 except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
