@@ -16,9 +16,8 @@ a1_line.request(consumer="A1", type=gpiod.LINE_REQ_DIR_OUT)
 a2_line.request(consumer="A2", type=gpiod.LINE_REQ_DIR_OUT)
 
 try:
-    en_line.set_value(1)
-
     while True:
+        en_line.set_value(1)
         a1_line.set_value(1)
         a2_line.set_value(0)
         time.sleep(5)
