@@ -20,8 +20,10 @@ try:
 
     while True:
         a1_line.set_value(1)
+        a2_line.set_value(0)
         time.sleep(5)
         a1_line.set_value(0)
+        a2_line.set_value(1)
         time.sleep(5)
 
 except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
