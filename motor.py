@@ -24,7 +24,7 @@ try:
         a1_line.set_value(0)
         a2_line.set_value(1)
         time.sleep(5)
-        print(en_line.state)
+        print(1)
 
 except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
     en_line.set_value(0)
