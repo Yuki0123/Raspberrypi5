@@ -26,6 +26,9 @@ try:
         time.sleep(5)
 
 except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
+    en_line.set_value(0)
+    a2_line.set_value(0)
+    a1_line.set_value(0)
     en_line.release()
     a1_line.release()
     a2_line.release()
