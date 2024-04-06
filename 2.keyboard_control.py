@@ -32,16 +32,16 @@ if __name__ == "__main__":
             if key in('wsadikjl'): 
                 if 'w' == key:
                     px.set_dir_servo_angle(0)
-                    px.forward(20)
+                    px.forward(40)
                 elif 's' == key:
                     px.set_dir_servo_angle(0)
-                    px.backward(20)
+                    px.backward(40)
                 elif 'a' == key:
                     px.set_dir_servo_angle(-30)
-                    px.forward(20)
+                    px.forward(40)
                 elif 'd' == key:
                     px.set_dir_servo_angle(30)
-                    px.forward(20)
+                    px.forward(40)
                 elif 'i' == key:
                     tilt_angle+=5
                     if tilt_angle>30:
